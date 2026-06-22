@@ -24,5 +24,6 @@ jobs:
           cache-dependency-path: js/package-lock.json
       - run: npm ci
       - run: npm run lint
+      - run: npm run lint:ext     # web-ext lint (store/AMO compliance)
       - run: npm run test:unit
       - run: npm run test:smoke   # hits zippopotam.us (geocoding); network-dependent

@@ -79,12 +79,34 @@ node server/test-client.mjs checkStore  site=target.com storeId=1348 zip=01545 \
 ```
 
 ## Firefox
-Same code (the SW uses `browser ?? chrome`). To load: copy `manifest.firefox.json`
-over `manifest.json` (it uses `background.scripts`+module and a `gecko.id`, which
-Chrome doesn't accept), then `about:debugging#/runtime/this-firefox` → **Load
-Temporary Add-on** → pick `manifest.json`. Or automate with
-`npx web-ext run -s extension`. Needs Firefox ≥121 (MV3 + module background).
-(Detected here: Firefox 152 — live-test via web-ext is a pending follow-up.)
+The single `manifest.json` is cross-browser: it declares both `background.service_worker`
+(Chrome) and `background.scripts` (Firefox), and the SW uses `browser ?? chrome`. Load
+via `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → pick
+`extension/manifest.json`, or `npx web-ext run -s extension`. Needs Firefox ≥142
+(the `data_collection_permissions` consent key). (Live web-ext run is a pending follow-up.)
+
+## Store packaging & compliance
+```bash
+npm run lint:ext     # web-ext lint — Chrome Web Store / AMO compliance (0 errors)
+npm run build:ext    # -> dist/bigbox_stock-<version>.zip  (upload to a store)
+```
+`lint:ext` runs in CI. The one remaining web-ext warning ("service_worker ignored by
+Firefox") is expected — it's the cost of one manifest serving both engines. Store
+notes:
+- **Icons**: 16/32/48/128 PNG in `extension/icons/` (regenerate with
+  `node extension/icons/make-icons.mjs`); swap in real artwork before a public listing.
+- **Privacy**: see [`../PRIVACY.md`](../PRIVACY.md) — no data leaves the machine (results
+  go only to the localhost bridge), no remote code, no analytics. Both stores require a
+  privacy-policy URL; point the dashboard at that file's published URL.
+- **Permissions justification** (you'll be asked in the dashboards): `tabs`/`scripting`
+  = open + read a retailer page; `cookies` = set the retailer's own store-selection
+  cookie to check a specific store; `storage` = cache the public store directory;
+  per-domain `host_permissions` = the sites it may read + the ZIP geocoder.
+- **Acceptance caveat**: this extension is *driven by a local companion process* (the
+  MCP bridge) to navigate/read/scrape — an unusual shape for a consumer store listing.
+  Expect in-depth review (1–4 wks) and possible questions; it's well-suited to unpacked
+  / self-distribution or Enterprise/self-hosted, and is a clean candidate for AMO's
+  self-distribution signing.
 
 ## MCP server (agent-facing)
 ```bash

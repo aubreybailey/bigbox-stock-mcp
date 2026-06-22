@@ -1,9 +1,26 @@
 {
   "manifest_version": 3,
-  "name": "storecheck",
+  "name": "bigbox-stock",
   "version": "0.2.0",
-  "description": "Drive the real browser to check per-store pickup availability across retail chains.",
-  "background": { "service_worker": "sw.js", "type": "module" },
+  "description": "Check per-store pickup availability across retail chains by driving your own browser.",
+  "author": "Aubrey Bailey",
+  "homepage_url": "https://github.com/aubreybailey/bigbox-stock-mcp",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "bigbox-stock",
+    "default_icon": { "16": "icons/icon-16.png", "32": "icons/icon-32.png" }
+  },
+  "background": {
+    "service_worker": "sw.js",
+    "scripts": ["sw.js"],
+    "type": "module"
+  },
   "permissions": ["tabs", "scripting", "cookies", "storage"],
   "host_permissions": [
     "https://www.target.com/*", "https://*.target.com/*",
@@ -21,5 +38,12 @@
     "https://www.harborfreight.com/*", "https://*.harborfreight.com/*",
     "https://www.menards.com/*", "https://*.menards.com/*",
     "https://api.zippopotam.us/*"
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bigbox-stock@aubreybailey.github.io",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  }
 }

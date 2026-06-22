@@ -1,5 +1,7 @@
 # node
 js/node_modules/
+js/dist/
+js/web-ext-artifacts/
 
 # python (omitted from this repo — kept locally only)
 /*.py

@@ -15,7 +15,7 @@ export default [
   },
   {
     // node code: bridge, MCP server, tests, configs, and the fs cache backend
-    files: ["server/**/*.mjs", "test/**/*.mjs", "extension/core/cache-node.mjs", "*.{js,mjs}"],
+    files: ["server/**/*.mjs", "test/**/*.mjs", "extension/core/cache-node.mjs", "extension/icons/make-icons.mjs", "*.{js,mjs}"],
     languageOptions: { ecmaVersion: 2023, sourceType: "module", globals: { ...globals.node } },
   },
   {
