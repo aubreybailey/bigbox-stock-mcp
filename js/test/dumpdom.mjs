@@ -10,9 +10,11 @@
  */
 import { spawn, spawnSync } from "node:child_process";
 import { openSync, writeFileSync, rmSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
 
 const APP = "io.github.ungoogled_software.ungoogled_chromium";
-const JS = "/home/aubreybailey/Downloads/grill/js";
+const JS = dirname(dirname(fileURLToPath(import.meta.url))); // repo js/ (this file is js/test/)
 const EXT = `${JS}/extension`;
 const DISPLAY = process.env.STORECHECK_DISPLAY || ":99";
 const XAUTH = process.env.STORECHECK_XAUTH || "";

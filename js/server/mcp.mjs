@@ -7,7 +7,7 @@
  * are forwarded to the bridge's /rpc, which relays to the extension running in the
  * user's real browser. Start the bridge and load the extension first (see ../README.md).
  *
- * Register:  claude mcp add storecheck-js -- node /home/aubreybailey/Downloads/grill/js/server/mcp.mjs
+ * Register:  claude mcp add bigbox-stock -- node "$(pwd)/server/mcp.mjs"   (run from the js/ dir)
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
