@@ -30,7 +30,7 @@ export class BestBuy extends Retailer {
       if (seen.has(sid)) continue;
       seen.add(sid);
       const window = html.slice(Math.max(0, m.index - 1200), m.index + 200);
-      const city = (/data-cy="LocationName"[^>]*>([^<]+)/.exec(window) || [, ""])[1].trim();
+      const city = (/data-cy="LocationName"[^>]*>([^<]+)/.exec(window)?.[1] || "").trim();
       const zm = /\b([A-Z]{2})\s*<\/?[^>]*>?\s*(\d{5})\b/.exec(window) || /\b(\d{5})\b/.exec(window);
       const zc = zm ? zm[zm.length - 1] : null;
       const g = zc ? await geocodeZip(zc) : null;

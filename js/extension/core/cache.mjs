@@ -43,7 +43,8 @@ export function rankStores(stores, origin, radius) {
     distMi: origin ? Math.round(milesBetween(origin, { lat: s.lat, lng: s.lng }) * 10) / 10 : null,
   }));
   const near = withDist.filter((s) => s.distMi == null || s.distMi <= radius);
-  near.sort((a, b) => (a.distMi == null ? 1 : 0) - (b.distMi == null ? 1 : 0) || (a.distMi || 1e9) - (b.distMi || 1e9));
+  // nulls last, then by distance ascending (use ?? so a 0.0-mi store isn't treated as missing)
+  near.sort((a, b) => (a.distMi == null ? 1 : 0) - (b.distMi == null ? 1 : 0) || (a.distMi ?? Infinity) - (b.distMi ?? Infinity));
   return near;
 }
 

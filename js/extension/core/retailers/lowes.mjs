@@ -28,7 +28,7 @@ export class Lowes extends Retailer {
 
   async parseStores(html) {
     const out = [], seen = new Set();
-    const text = visibleText(html).replace(/ /g, " ");
+    const text = visibleText(html).replace(/\u00a0/g, " ");
     for (const m of (html || "").matchAll(/\/store\/([A-Z]{2})-([A-Za-z.-]+)\/(\d{3,4})/g)) {
       const [, st, cityRaw, num] = m;
       if (seen.has(num)) continue;

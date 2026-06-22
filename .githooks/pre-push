@@ -1,0 +1,13 @@
+#!/bin/sh
+# Pre-push gate: lint + fast (network-free) unit tests for the JS project.
+# Enabled via `git config core.hooksPath .githooks` (the js `prepare` script does
+# this automatically on `npm install`). Bypass once with `git push --no-verify`.
+set -e
+root="$(git rev-parse --show-toplevel)"
+if [ -d "$root/js/node_modules" ]; then
+  echo "pre-push: js lint + unit tests…"
+  cd "$root/js"
+  npm run check
+else
+  echo "pre-push: skipping (js/node_modules missing — run 'cd js && npm install')"
+fi

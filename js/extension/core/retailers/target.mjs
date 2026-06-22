@@ -31,8 +31,8 @@ export class Target extends Retailer {
       const sid = idm[1];
       if (seen.has(sid)) continue;
       seen.add(sid);
-      const name = (/StoreCardTitle"[^>]*>([^<]+)</.exec(block) || [, ""])[1].trim();
-      const addr = (/StoreAddress"[^>]*>([^<]+)</.exec(block) || [, ""])[1].trim();
+      const name = (/StoreCardTitle"[^>]*>([^<]+)</.exec(block)?.[1] || "").trim();
+      const addr = (/StoreAddress"[^>]*>([^<]+)</.exec(block)?.[1] || "").trim();
       const zm = /\b(\d{5})(?:-\d{4})?\b/.exec(addr);
       const zc = zm ? zm[1] : null;
       const g = zc ? await geocodeZip(zc) : null;

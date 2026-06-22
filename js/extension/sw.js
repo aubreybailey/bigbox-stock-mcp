@@ -77,7 +77,6 @@ async function setCookies(cookies) {
 
 // ── layer 2: stores near me ─────────────────────────────────────────────────────
 async function findStores({ site, zip, radius = 30, refresh = false }) {
-  const r = get(site);
   const adapter = chromeStorageAdapter();
   const fetchHtml = async (url) => {
     const tab = await api.tabs.create({ url, active: true });

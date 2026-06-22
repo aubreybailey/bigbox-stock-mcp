@@ -6,7 +6,7 @@
  * instances configured by data. get(domain|url) returns a Retailer (an empty
  * GenericRetailer for unknowns, so the generic classifier still runs).
  */
-import { Retailer, GenericRetailer } from "./base.mjs";
+import { GenericRetailer } from "./base.mjs";
 import { Target } from "./retailers/target.mjs";
 import { BestBuy } from "./retailers/bestbuy.mjs";
 import { Lowes } from "./retailers/lowes.mjs";
