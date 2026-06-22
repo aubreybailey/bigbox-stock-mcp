@@ -1,0 +1,23 @@
+# node
+js/node_modules/
+
+# python (omitted from this repo — kept locally only)
+/*.py
+__pycache__/
+.venv/
+/retailers/
+/mcp_server.py
+/storecheck.py
+README.python.md
+FINDINGS.md
+PLAN.md
+
+# scraped output / scratch / logs (the test fixtures live in js/test/fixtures/)
+*.log
+storecheck_out/
+loc_out/
+sc_out/
+zt_out/
+
+# editor / agent local state
+.claude/

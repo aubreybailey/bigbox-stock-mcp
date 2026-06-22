@@ -1,0 +1,17 @@
+{
+  "name": "storecheck-js",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "storecheck JS rewrite — MV3 extension + local bridge/MCP (Phase A spike).",
+  "scripts": {
+    "bridge": "node server/bridge.mjs",
+    "check": "node server/test-client.mjs",
+    "test": "node test/smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "ws": "^8.18.0",
+    "zod": "^4.4.3"
+  }
+}
